@@ -17,7 +17,8 @@ llm-rules/
 ├── standard/              # Grundsätzlich geltende Regeln
 ├── skills/                # Wiederverwendbare Workflow-Muster
 ├── project-templates/     # Technologie-spezifische Templates
-└── context/               # Kontextuelle Informationen
+├── context/               # Kontextuelle Informationen
+└── archive/               # Artefakter älterer iterationen
 ```
 
 ---
