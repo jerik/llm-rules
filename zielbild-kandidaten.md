@@ -75,9 +75,6 @@ llm-rules/
 - MUST: Inhalte und Prompts kritisch analysieren
 - MUST: Schwächen oder Widersprüche benennen
 - SHOULD: Verbesserungsvorschläge machen (als Vorschläge kennzeichnen)
-
-### Datennutzung
-- MUST: Alle bereitgestellten Daten analysieren und nutzen
 ```
 
 **Quelle:** DP-R01-R12, CL-R42-R46, FD-R24-R27 (konsolidiert)
@@ -173,6 +170,8 @@ llm-rules/
 - MUST: Dokumentation bei neuem user-facing Behavior aktualisieren
 - MUST: README, CHANGELOG synchron halten
 - Begründung: Verhindert Verwirrung, Fehlannahmen
+- MUST: Dokumentation in markdown 
+
 
 ## Sprache
 - MUST: Code und Kommentare nur in Englisch
@@ -511,9 +510,9 @@ Template für Python-Projekte.
   uv run pytest -v
   ```
 
-### uv (optional)
-- Context: Neueres Python-Tool, projektspezifisch
-- Falls im Projekt verwendet:
+### uv 
+- MUST: uv für python verwenden
+- command:
   ```bash
   uv run pytest -v
   uv run ruff check .
@@ -764,7 +763,7 @@ Die Ausführungsumgebung wird vom Projekt definiert oder vom User kommuniziert.
 
 ### Dateizugriff
 - pi: Vollständiger Dateizugriff
-- claude-on-web: Eingeschränkter Dateizugriff (Upload/Download)
+- claude-on-web: Datenzugriff auf das freigegegben git repository
 
 ### Persistenz
 - pi: Session-übergreifend persistent
