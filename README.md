@@ -29,10 +29,13 @@ Grundsätzlich geltende Regeln, unabhängig von Projekt oder Technologie.
 
 | Regelwerk | Beschreibung | Datei |
 |-----------|--------------|-------|
+| **Activation Manifest** | Expliziter Aktivierungsmechanismus via llm-rules.yml | [standard/activation-manifest.md](standard/activation-manifest.md) |
+| **Precedence Model** | Präzedenz-Hierarchie, Konfliktauflösung, EXCEPTION-Mechanismus | [standard/precedence-model.md](standard/precedence-model.md) |
 | **Communication** | Rückfragen, Frageformat (f1...fn), Antwortstil (tl;dr), kritische Analyse | [standard/communication.md](standard/communication.md) |
 | **Git Workflow** | Branch-Strategie, geschützter Main, Commit-Messages, Conventional Commits | [standard/git-workflow.md](standard/git-workflow.md) |
 | **Code Quality** | Diff-Größe, Tests, Rückwärtskompatibilität, Dokumentation | [standard/code-quality.md](standard/code-quality.md) |
-| **Error Handling & Security** | Error Handling, Logging, Timeouts, Credentials-Management | [standard/error-handling.md](standard/error-handling.md) |
+| **Error Handling & Security** | Error Handling, Logging, Timeouts, Credentials-Management, Security-Regeln | [standard/error-handling-security.md](standard/error-handling-security.md) |
+| **Testing** | Test-Philosophie, Minimale Policy, Test-Isolation, DoD | [standard/testing.md](standard/testing.md) |
 | **Versioning** | Semantic Versioning | [standard/versioning.md](standard/versioning.md) |
 
 ---
@@ -56,7 +59,9 @@ Technologie-spezifische Templates für verschiedene Stacks.
 
 | Template | Beschreibung | Datei |
 |----------|--------------|-------|
-| **Python Stack** | PEP 8, ruff, pytest, uv, Type Hints | [project-templates/python-stack.md](project-templates/python-stack.md) |
+| **Python Stack** | PEP 8, ruff, pytest, uv, Type Hints, Security | [project-templates/python-stack.md](project-templates/python-stack.md) |
+| **Shell Scripting** | Bash/sh, Windows CMD, Quoting, Security | [project-templates/shell-scripting.md](project-templates/shell-scripting.md) |
+| **Frontend** | HTML/JS/CSS, XSS-Prevention, Security | [project-templates/frontend.md](project-templates/frontend.md) |
 | **Vim Plugin** | Plugin-Struktur, vint, Tests, Scoping | [project-templates/vim-plugin.md](project-templates/vim-plugin.md) |
 | **Keypirinha Plugin** | Keypirinha-API, UI-Responsiveness, Error Handling | [project-templates/keypirinha-plugin.md](project-templates/keypirinha-plugin.md) |
 
@@ -74,26 +79,52 @@ Kontextuelle Informationen für spezifische Ausführungsumgebungen.
 
 ## Nutzung
 
-### In Projekten
+### Activation Manifest
 
-1. **Standard-Regeln:** Gelten automatisch für alle Projekte
-2. **Skills:** Explizit in Projektvorgaben aktivieren (z.B. in `CLAUDE.md`)
-3. **Templates:** Entsprechendes Template für Technologie-Stack referenzieren
+Erstelle `llm-rules.yml` im Projekt-Root:
 
-### Beispiel: Python-Projekt mit Standard-Workflow
+```yaml
+# llm-rules.yml
+version: "1.0"
+template: python-stack
+skills:
+  - workflow-standard
+  - fortschritt-tracking
+```
 
-In `CLAUDE.md` des Projekts:
+**Details:** Siehe [standard/activation-manifest.md](standard/activation-manifest.md)
 
-```markdown
-# Project Rules
+### Was wird aktiviert?
 
-## LLM Rules
-- Standard: Alle Regeln aus llm-rules/standard/
-- Skills: workflow-standard, fortschritt-tracking
-- Template: python-stack
+1. **Standard-Regeln:** Immer aktiv (keine Deklaration nötig)
+2. **Template:** Genau ein Stack-Template (REQUIRED)
+3. **Skills:** Optional, explizit pro Skill aktivieren
 
-## Project-specific
-- [Projektspezifische Ergänzungen hier]
+### Beispiele
+
+**Python-Projekt mit Standard-Workflow:**
+```yaml
+version: "1.0"
+template: python-stack
+skills:
+  - workflow-standard
+  - fortschritt-tracking
+```
+
+**Vim-Plugin ohne Skills:**
+```yaml
+version: "1.0"
+template: vim-plugin
+```
+
+**Keypirinha-Plugin (Browser-Umgebung):**
+```yaml
+version: "1.0"
+environment: claude-on-web
+template: keypirinha-plugin
+skills:
+  - workflow-standard
+  - synergie-analyse
 ```
 
 ---
