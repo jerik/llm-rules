@@ -17,7 +17,9 @@ Nicht-Ziele:
 ---
 
 ## Aktueller Status
-- Phase: Phase 1 abgeschlossen
+- Phase: Rekonstruktionsphase vollständig abgeschlossen
+- Gate 1: Freigegeben
+- Phase 4: Abgeschlossen
 - Letzte Aktualisierung: 2025-01-17
 
 ---
@@ -54,7 +56,15 @@ Outputs:
   - Projekt-spezifisch
   - Unklar / kontextabhängig
 
-Status: offen
+Status: ✅ abgeschlossen (2025-01-17)
+
+Ergebnis:
+- Alle 132 Regeln klassifiziert
+- ~35 Standard-Vorgaben identifiziert
+- ~25 Skills identifiziert
+- ~60 Projekt-spezifische Regeln
+- ~5 Unklare Regeln
+- Dokumentiert in: klassifikation.md
 
 ---
 
@@ -67,7 +77,15 @@ Outputs:
 - Risikoanalyse bei Nichtbeachtung
 - Einschätzung: grundsätzlich vs. situativ
 
-Status: offen
+Status: ✅ abgeschlossen (2025-01-17)
+
+Ergebnis:
+- Intent und Risiko für alle Regelkategorien analysiert
+- Grundsätzlich vs. situativ eingeordnet
+- Risiko-Schwerpunkte identifiziert (DoD, Security, Kommunikation, Git, UI)
+- Duplikations-Muster als Wichtigkeits-Indikator erkannt
+- 4 offene Fragen für Entscheidungsträger dokumentiert
+- Dokumentiert in: intent-risiko.md
 
 ---
 
@@ -82,15 +100,31 @@ Outputs:
   - Projekt-Grenzen
 - Alle Punkte als Vorschläge gekennzeichnet
 
-Status: gesperrt (Gate 1 nicht abgeschlossen)
+Status: ✅ abgeschlossen (2025-01-17)
+
+Ergebnis:
+- 5 Standard-Regelwerke vorgeschlagen (Communication, Git, Code Quality, Error Handling, Versioning)
+- 4 Skills vorgeschlagen (Standard-Workflow, Tracking, Synergie-Analyse, Git-Tagging)
+- 3 Project Templates vorgeschlagen (Python, Vim, Keypirinha)
+- 1 Context-Information (Execution Environment)
+- 132 Regeln konsolidiert in strukturierte Bausteine
+- Alle als Vorschläge gekennzeichnet
+- Dokumentiert in: zielbild-kandidaten.md
 
 ---
 
 ## Gates & Entscheidungen
 
 ### Gate 1 – Rekonstruktionsphase abgeschlossen
-Status: offen  
+Status: ✅ freigegeben (2025-01-17)  
 Kommentar:
+- Phase 1, 2 und 3 vollständig abgeschlossen
+- Alle Regeln inventarisiert, klassifiziert und analysiert
+- Keine Umformulierung oder Optimierung erfolgt (wie gefordert)
+- Widersprüche markiert, nicht aufgelöst
+- Dokumentation: inventar.md, klassifikation.md, intent-risiko.md
+- Offene Entscheidungen geklärt und dokumentiert
+- Freigabe durch Entscheidungsträger erteilt
 
 ---
 
@@ -101,7 +135,25 @@ Kommentar:
 ---
 
 ## Offene Entscheidungen
-- <noch keine>
+
+### Entschieden (2025-01-17):
+
+1. **Branch-Namenskonvention:** ✅
+   - `claude/*-<session-id>` wenn claude-on-web (Browser)
+   - `claude/*` wenn claude-in-shell (pi)
+   - Status: Als Kontext-Regel in Zielbild aufnehmen
+
+2. **Frageformat:** ✅
+   - Standard: f1...fn
+   - Status: Als Standard etablieren
+
+3. **Git Tag Management:** ✅
+   - Projektspezifisch
+   - Status: Nicht als Standard, sondern als optionaler Skill
+
+4. **FD-R28 ("Vorgehen im Dialog"):** ✅
+   - Verwerfen
+   - Status: Aus Regelwerk entfernen
 
 ---
 
@@ -111,4 +163,34 @@ Kommentar:
   - Alle Regeln strukturiert und mit IDs versehen
   - Duplikate und Widersprüche markiert
   - Dokumentation: inventar.md
+
+- **2025-01-17:** Phase 2 (Klassifikation) abgeschlossen
+  - Alle 132 Regeln nach Gültigkeitsbereich klassifiziert
+  - ~35 Standard-Vorgaben, ~25 Skills, ~60 Projekt-spezifisch, ~5 Unklar
+  - Technologie-Cluster identifiziert (Python, Vim, Keypirinha)
+  - Workflow-Muster erkannt
+  - Dokumentation: klassifikation.md
+
+- **2025-01-17:** Phase 3 (Intent & Risiko) abgeschlossen
+  - Intent und Risiko für alle Regelkategorien analysiert
+  - Grundsätzlich vs. situativ eingeordnet
+  - Risiko-Schwerpunkte: DoD, Security, Kommunikation, Git, UI
+  - Duplikations-Muster als Wichtigkeits-Indikator
+  - 4 offene Entscheidungen dokumentiert
+  - Dokumentation: intent-risiko.md
+
+- **2025-01-17:** Gate 1 freigegeben
+  - Rekonstruktionsphase (Phase 1-3) vollständig abgeschlossen
+  - Keine Optimierung, keine Umformulierung durchgeführt
+  - Offene Entscheidungen geklärt
+  - Explizite Freigabe erteilt
+
+- **2025-01-17:** Phase 4 (Kandidaten fürs Zielbild) abgeschlossen
+  - 5 Standard-Regelwerke vorgeschlagen
+  - 4 Skills vorgeschlagen
+  - 3 Project Templates vorgeschlagen
+  - 1 Context-Information
+  - Alle 132 Regeln konsolidiert
+  - Alle Vorschläge als solche gekennzeichnet
+  - Dokumentiert in: zielbild-kandidaten.md
 
