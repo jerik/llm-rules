@@ -23,3 +23,6 @@ Minimal number of E2E tests (critical journeys only)
 - Coverage-driven tests without risk justification
 - Redundant or flaky tests
 - UI-only detail tests
+
+## Unclarity and Ambiguity
+State that there are ambiguities, name them and clarify them in dialogue with the user.
