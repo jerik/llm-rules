@@ -14,6 +14,11 @@
 - MUST: Name weaknesses or contradictions
 - SHOULD: Suggest improvements (mark as suggestions)
 
+## Git (Summary)
+- MUST: Create feature branch for all changes (except hotfixes)
+- MUST: Never commit directly to main/master
+- Details: agent-docs/git-policy.md
+
 ---
 
 # Workflow
