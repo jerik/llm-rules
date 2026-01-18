@@ -27,6 +27,11 @@ Apply these rules to all Git operations in this repository.
 - MUST: Pass CI checks before merge
 - SHOULD: Be reviewed by at least one person
 
+## GitHub CLI (gh)
+- SHOULD: Use `gh` CLI if available for GitHub operations
+- Prefer `gh pr create`, `gh pr merge`, `gh issue` over web UI
+- Check availability: `command -v gh`
+
 ## Safety Rules
 - NEVER commit secrets or credentials
 - Coordinate before rewriting history
