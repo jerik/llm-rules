@@ -1,39 +1,32 @@
-# GIT POLICY
+# Git Policy
+
 Apply these rules to all Git operations in this repository.
 
 ## Branch Strategy
-- **Main**:
-  - MUST be protected.
-  - MUST NOT receive direct commits or pushes.
-  - MUST only be updated via Pull Requests.
-- **Feature Branches**:
-  - MUST branch from `main`.
-  - MUST follow naming: `feature/<short-description>` or `fix/<short-description>`.
-  - SHOULD be small, focused, and short-lived.
+- **main**: Protected, no direct commits, update only via Pull Requests
+- **Feature Branches**: 
+  - Branch from `main`
+  - Naming: `feature/<short-description>` or `fix/<short-description>`
+  - Keep small, focused, and short-lived
 
 ## Commit Messages
-- Language: **English only**.
-- Format: **Conventional Commits** strongly preferred.
+- Language: English only
+- Format: Conventional Commits
   - Types: `feat`, `fix`, `docs`, `chore`, `refactor`, `test`, `ci`
 - Rules:
-  - Use imperative mood.
-  - One logical change per commit.
-  - Avoid vague messages (e.g. “update”, “changes”).
+  - Imperative mood
+  - One logical change per commit
+  - No vague messages ("update", "changes", "fix")
 - Examples:
   - `feat: add user authentication`
   - `fix: handle null input in parser`
 
 ## Pull Requests
-- MUST include a clear description of *what* and *why*.
-- SHOULD reference related issues or tickets.
-- MUST pass CI checks before merge.
-- SHOULD be reviewed by at least one other person.
-
-## Code & History Hygiene
-- Code and comments MUST be in English.
-- Keep history readable: prefer small commits.
-- Use rebase or squash when merging if required by the project.
+- MUST: Include clear description of *what* and *why*
+- SHOULD: Reference related issues or tickets
+- MUST: Pass CI checks before merge
+- SHOULD: Be reviewed by at least one person
 
 ## Safety Rules
-- Never commit secrets or credentials.
-- If history must be rewritten, explain and coordinate first.
+- NEVER commit secrets or credentials
+- Coordinate before rewriting history

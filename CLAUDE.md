@@ -1,74 +1,114 @@
-# Kommunikation
-- MUST: Rückfragen stellen, bevor du rätst oder annimmst
-- MUST: Fragen sofort stellen, nicht nach Implementierung
-- MUST: Sachlich, kritisch und präzise antworten
-- MUST: Keine ausführlichen Antworten ohne explizite Anfrage
-- MUST: Fragen mit f1, f2, ... fn nummerieren, damit ich effizienter antworten kann
-- SHOULD: Fragen im TL;DR-Stil formulieren (max. 3-4 Zeilen)
-- MUST: Stelle maximal 2 Fragen in derselben runde
-- MUST: Jede Frage muss afu meiner vorherigen Antwort aufbauen und den Sachverhalt verfeinern
+# Agent Instructions
 
-## Kritische Analyse
-- MUST: Inhalte und Prompts kritisch analysieren
-- MUST: Schwächen oder Widersprüche benennen
-- SHOULD: Verbesserungsvorschläge machen (als Vorschläge kennzeichnen)
+## Communication
+- MUST: Ask clarifying questions before guessing or assuming
+- MUST: Ask questions immediately, not after implementation
+- MUST: Be factual, critical, and precise
+- MUST: Keep responses concise unless explicitly asked for detail
+- MUST: Number questions as f1, f2 (max 2 per round)
+- MUST: Each question must build on user's previous answer
+- SHOULD: Formulate questions in TL;DR style (max 3-4 lines)
+
+## Critical Analysis
+- MUST: Critically analyze content and prompts
+- MUST: Name weaknesses or contradictions
+- SHOULD: Suggest improvements (mark as suggestions)
+
+---
 
 # Workflow
-- MUST: Halte dich IMMER an die einzelnen Phase des Workflows, ausser der Nutzer gibt dir explizit anderen Anweisungen
-- Phase 1: Erkunden und Auftragsklärung 
-    - MUST: Lies die userstory.md sofern vorhanden oder frage nach den Nutzer nach dem Auftrag
-    - MUST: Lies die readme.md, documentation.md, lessonslearned.md sofern vorhanden um das Applikation zu verstehen
-    - MUST: Kläre im Dialog mit dem Nutzer den Auftrag und erweitere die userstory.md mit dem Auftrag
-    - GATE: Diese Phase ist abgeschlossen wenn der Auftrag fertiggestellt ist und der Nutzer diesen freigegeben hat. 
-- Phase 2: Solutiondesign und Plan
-    - MUST: Lies alle notwendigen Dateien um dich mit der Applikation vertraut zu machen
-    - MUST: Erstelle anhand der Inforamtionen die du zur Applikatin hast und der userstory.md ein solutiondesign.md auf hohem nivea
-    - SHOULD: Das solutiondesign.md beschreibt: 
-        - strukturierten Anforderung
-        - Ist-Analysse und Kontext
-        - Lösungsoptinen (2-3), grob skizziert mit Entscheidungsmatrix (Kriterien, gewichtung, Klare empfehlung)
-        - Architektur und Lösungsansatz
-        - Securityaspekte
-        - Umsetzungs- und Testaspekte 
-    - MUST: Kläre im Dialog das solutiondesign mit dem Nutzer bis es final ist
-    - MUST: Auf Basis des solutiondesign.md wird ein plan.md mit dem umsetzungsphasen- und milestones erstellt. 
-    - GATE: Diese Phase ist abgeschlossen wenn der plan.md fertig ist und der Nutzer diesen freigegeben hat
-- Phase 3: Implementierung und Test
-    - MUST: Befolge den plan.md bei der Implmentierung
-    - MUST: Aktualsiere den plan.md während der Implementierung, damit der Nutzer den Status nachverfolgen kann
-    - MUST: Befolge folgenden Prinzipien bei der Implementierung: KISS, DRY, YAGNI
-    - MUST: Entwickle in kleinen Schritten und checken den code oft ein, mit aussagekräftiger commit message
-    - MUST: Erstelle Testfälle die den implementierten Code testen
-    - MAY: TDD, wenn sinnvoll erscheint
-    - MUST: Iteriere bei der Implementierung bis alle Tests ohne Fehler durchlaufen (grün sind)
-    - MUST: Ist der plan.md abgeschlossen, verbessere den Code durch Linting und Formatierung. Führe danach alle Test aus uns interiere bis alle Tests grün sind 
-    - GATE: Informiere den Nutzer das die Implmentierung beendet ist. Diese Phase ist abgeschlossen wenn der Nutzer diesen freigegeben hat
-- Phase 4: Reporting, Review und Freigabe 
-    - MUST: Aktualisiere die Projektdokumentation: readme.md, documentation.md, lessonslearned.md
-    - MUST: Aktualisiere die solutiondesign.md wenn sich Änderungen während der Implmementierung ergeben haben
 
+## Overview
 
-## Progressive Disclosure Anweisungen
-Die folgenden Dokumente enthalten aufgaben- oder domänenspezifische Anleitungen.
-Lies keien Dateien ungeprüft oder pauschal
-Du MUST entscheiden, welche davon für die aktuelle Aufgabe relevant sind.
- 
-### Anweisungsindex
-#### Test-Richtlinien
-Datei: agent-docs/testing-policy.md
+```
+Phase 1 (always) → Size Classification → Phase 2/3/4 (based on size)
+```
 
-Lese diese Datei wenn: 
-    - Tests geschrieben werden 
-    - Tests verbessert werden sollen
+| Size | Criteria | Phases |
+|------|----------|--------|
+| **XS** | Typo, config change, trivial fix, 1-2 files | Phase 1 → Phase 3 |
+| **S** | Small feature, <50 LOC, single component | Phase 1 → plan.md → Phase 3 |
+| **M** | New feature, multiple components, 50-200 LOC | Phase 1 → plan.md → Phase 3 → Phase 4 |
+| **L/XL** | Architecture change, new module, >200 LOC | Phase 1 → Phase 2 → Phase 3 → Phase 4 |
 
-#### Python-Richtlinien
-Datei: agent-docs/python-policy.md
+User can override with: `use [SIZE]` or `use full workflow`
 
-Lese diese Datei: 
-    - wenn python code erstellt oder aktualisiert wird
+---
 
-#### Git-Richtlinien
-Datei: agent-docs/git-policy.md
+## Phase 1: Discovery & Clarification (always)
+- MUST: Read userstory.md if present, otherwise ask user for the task
+- MUST: Read readme.md, documentation.md, lessonslearned.md if present
+- MUST: Clarify task in dialogue, update userstory.md
+- **GATE:** Task is clear and approved by user
+- **THEN:** Classify task size, announce: `[SIZE] <brief reasoning>`
 
-Lese diese Datei: 
-    - wenn python code erstellt oder aktualisiert wird
+---
+
+## Phase 2: Solution Design (L/XL only)
+- MUST: Read all necessary files to understand the application
+- MUST: Create solutiondesign.md containing:
+  - Structured requirements
+  - As-is analysis and context
+  - 2-3 solution options with decision matrix (criteria, weighting, recommendation)
+  - Architecture and approach
+  - Security aspects
+  - Implementation and test considerations
+- MUST: Clarify solutiondesign.md in dialogue until final
+- MUST: Create plan.md with implementation phases and milestones
+- **GATE:** solutiondesign.md and plan.md complete and approved by user
+
+---
+
+## Phase 2b: Planning (S/M only)
+- MUST: Create plan.md with implementation steps
+- **GATE:** plan.md approved by user
+
+---
+
+## Phase 3: Implementation & Test (always)
+- MUST: Follow plan.md during implementation (if exists)
+- MUST: Update plan.md status during implementation (if exists)
+- MUST: Follow principles: KISS, DRY, YAGNI
+- MUST: Develop in small increments, commit often with meaningful messages
+- MUST: Create tests for implemented code (see testing-policy.md for ROI decision)
+- MUST: Iterate until all tests pass
+- MUST: Run linting and formatting when complete, then re-run tests
+- MAY: Use TDD when appropriate
+- **GATE:** Implementation complete, user informed and approved
+
+---
+
+## Phase 4: Reporting & Review (M/L/XL only)
+- MUST: Update project documentation (readme.md, documentation.md, lessonslearned.md)
+- MUST: Update solutiondesign.md if changes occurred during implementation (L/XL)
+
+---
+
+# Progressive Disclosure
+
+The following documents contain task-specific guidelines.  
+Do NOT read files blindly. Decide which are relevant for the current task.
+
+## Instruction Index
+
+### Git Policy
+File: `agent-docs/git-policy.md`
+
+Read when:
+- Creating commits
+- Working with branches
+- Creating pull requests
+
+### Python Policy
+File: `agent-docs/python-policy.md`
+
+Read when:
+- Creating or modifying Python code
+- Setting up Python projects
+
+### Testing Policy
+File: `agent-docs/testing-policy.md`
+
+Read when:
+- Writing or improving tests
+- Deciding whether to write tests

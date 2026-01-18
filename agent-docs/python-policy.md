@@ -1,30 +1,39 @@
-# PYTHON POLICY – ROI-BASED
-Apply these rules to all Python changes in this repo. Prefer the simplest correct solution.
+# Python Policy
+
+Apply these rules to all Python code in this repository. Prefer the simplest correct solution.
 
 ## Code Standards
-- Target: Python 3.x (project default). Keep code readable and explicit.
-- Style: PEP 8, 4-space indent, max ~100 chars/line unless existing code differs.
-- Typing: Use type hints for public functions and non-trivial logic; prefer `dataclasses` for simple models.
-- Naming: `snake_case` for funcs/vars, `PascalCase` for classes, `UPPER_SNAKE_CASE` for constants.
-- Errors: Fail fast with clear exceptions; validate inputs at boundaries.
-- Logging: Use `logging` (no print) for non-trivial flows; no sensitive data in logs.
-- Structure: Keep modules small; avoid circular imports; separate domain logic from IO.
+- Target: Python 3.x (project default)
+- Style: PEP 8, 4-space indent, max ~100 chars/line
+- Typing: Type hints for public functions and non-trivial logic
+- Models: Prefer `dataclasses` for simple data structures
+- Naming:
+  - `snake_case`: functions, variables
+  - `PascalCase`: classes
+  - `UPPER_SNAKE_CASE`: constants
+- Errors: Fail fast with clear exceptions, validate inputs at boundaries
+- Logging: Use `logging` module (no print), no sensitive data in logs
+- Structure: Small modules, no circular imports, separate domain logic from IO
 
 ## Patterns
-- Prefer pure functions and dependency injection for testability.
-- Avoid over-engineering: no unnecessary abstractions, frameworks, or premature generalization.
-- Use composition over inheritance; keep side effects isolated.
-- For scripts/CLI: predictable exit codes, robust argument parsing, idempotent operations.
+- Prefer pure functions and dependency injection
+- Composition over inheritance
+- Isolate side effects
+- No over-engineering: no unnecessary abstractions or premature generalization
+- Scripts/CLI: predictable exit codes, robust argument parsing, idempotent operations
 
-## Tool Usage (Mandatory)
-- Package management: **use `uv` instead of `pip`** for installs, syncing, and venvs.
-- Dependencies: prefer `uv pip install` / `uv sync`; do not use bare `pip`.
-- Linting/Format: use **ruff** (lint + format) via `uv run ruff`.
-- Testing: use **pytest** via `uv run pytest`.
-- Respect existing config in `pyproject.toml`.
-- Do not introduce new dependencies without justification and minimal impact.
+## Tools (Mandatory)
+| Task | Tool | Command |
+|------|------|---------|
+| Package management | uv | `uv pip install`, `uv sync` |
+| Virtual env | uv | `uv venv` |
+| Linting & Format | ruff | `uv run ruff check`, `uv run ruff format` |
+| Testing | pytest | `uv run pytest` |
+
+- Respect existing `pyproject.toml` config
+- Do not introduce dependencies without justification
 
 ## Workflow
-- Before coding: state assumptions and identify files to touch.
+- Before coding: State assumptions, identify files to modify
 - Always use virtual environments
-- After coding: ensure tests pass (or explain why they cannot) and summarize changes + risks.
+- After coding: Ensure tests pass, summarize changes and risks
